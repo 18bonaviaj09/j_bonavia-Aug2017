@@ -39,9 +39,77 @@ public class Calculate {
 		return (b * b) - (4 * a * c);
 	}
 	
-	/* This method takes the integer parts of a mixed number and creates an improper fraction
-	public static string toImproperFrac (int whole, int numerator, int denominator) {
-		return  
-	}*/
+	// This method takes the integer parts of a mixed number and returns an improper fraction in the form of a string.
+	public static String toImproperFrac (int whole, int numerator, int denominator) {
+		return  ((whole * denominator) + numerator) + "/" + denominator;
+	}
+	
+	// This method takes the integer parts of an improper fraction and returns a mixed number in the form of a string.
+	public static String toMixedNum (int numerator, int denominator) {
+		return (numerator / denominator) + " " + (numerator % denominator) + "/" + (denominator);
+	}
+	
+	/*This method takes the four integer parts of two binomial equations and its variable in the form of a string
+	 * and returns a quadratic equation in the form of a string. */
+	public static String foil (int a, int b, int c, int d, String variableLetter) {
+		return (a * c) + variableLetter + "^2 + " + ((a * d) + (b * c)) + variableLetter + " + " + (b * d);
+	}
+	
+	/* This method takes two integers and determines whether the first one is divisible by the second.
+	* The output is in the form of a boolean. */
+	public static boolean isDivisibleBy (int dividend, int divisor) {
+		return (dividend % divisor) == 0;
+	}
+	
+	// This method takes a double and returns its absolute value
+	public static double absValue (double operand) {
+		if (operand < 0) {
+			return operand * -1;
+		}
+		else {
+			return operand;
+		}
+	}
+	
+	// This method takes two integers and returns the maximum between them. 
+	public static int max (int operand1, int operand2) {
+		if (operand1 < operand2) {
+			return operand2; 
+		}
+		else {
+			return operand1;
+		}
+	}
+	
+	// This method takes three integers and returns the maximum between them. 
+	public static int max (int operand1, int operand2, int operand3) {
+		if ((operand1 < operand2) && (operand3 < operand2)) {
+			return operand2; 
+		}
+		else  if ((operand1 < operand3) && (operand2 < operand3)) {
+			return operand3;
+		}
+		
+		else {
+			return operand1;
+		}
+	}
+	
+	//This method takes two integers and returns the minimum between them 
+	public static int min (int operand1, int operand2) {
+		if (operand1 > operand2) {
+			return operand2; 
+		}
+		else {
+			return operand1;
+		}
+	}
+	
+	// This method takes a double and rounds it to two decimal places
+	public static double round2 (double operand) {
+		int times100 = (int) (operand * 100);
+		double rounded = (times100 / 100.00);
+		return rounded;
+	}
 	
 }
