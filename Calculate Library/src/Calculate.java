@@ -112,4 +112,27 @@ public class Calculate {
 		return rounded;
 	}
 	
+	//This method accepts and integer and a double and raises the double to the integer power. 
+	public static double exponent (double operand, int exponent) {
+		double awnser = 1.00;
+		for (int i = 0; i < exponent; i++) {
+			awnser = awnser * operand;
+		}
+		return awnser;
+	
+	}
+	
+	// This method accepts an integer and returns its factorial as an integer. 
+	public static int factorial (int operand) {
+		int awnser = 1;
+		while (operand > 0) {
+			awnser = awnser * operand;
+			operand--;
+		}
+		return awnser;
+	}
+	
 }
+
+
+
