@@ -132,6 +132,46 @@ public class Calculate {
 		return awnser;
 	}
 	
+	// This method accepts and integer and returns whether or not it is prime in the form of a boolean.
+	public static boolean isPrime (int operand) {
+		if (operand < 2) {
+			return false;
+		} else if (operand == 2) {
+			return true;
+		} else
+			for (int divisor = 2; divisor < operand; divisor++) {
+				if (isDivisibleBy(operand,divisor)) {
+					return false;
+				}
+			}
+		return true;
+	}	
+	
+	// This method accepts two integers and returns their greatest common factor
+	public static int gcf (int operand1, int operand2) {
+		if(operand1 == operand2) {
+			return operand1;
+		} else if (operand1 == 1 || operand2 == 1) {
+			return 1;
+		} else {
+			for (int factor = operand1; factor > 1; factor--) {
+				if (isDivisibleBy(operand1, factor) && isDivisibleBy(operand2, factor)) {
+					return factor;
+				}
+			}
+		}
+		return 1;
+	}
+	
+	// This method accepts accepts a double and returns an approximation of the square root of that double
+	public static double sqrt (double operand) {
+		double guess = operand/2;
+		while ((guess * guess > operand + 0.005) || (guess * guess) < operand - 0.005) {
+			guess = (0.5 * ((operand / guess) + guess));
+		}
+		return round2 (guess);
+	}
+
 }
 
 
