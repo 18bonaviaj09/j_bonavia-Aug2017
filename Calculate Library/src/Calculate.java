@@ -9,6 +9,11 @@ public class Calculate {
 		return operand * operand;
 	}
 	
+	// This method takes a double and returns its square.
+		public static double square (double operand) { 
+			return operand * operand;
+		}
+	
 	// This method takes an integer and returns its cube.
 	public static int cube (int operand) { 
 		return operand * operand * operand;
@@ -36,7 +41,7 @@ public class Calculate {
 	
 	// This method takes the three coefficients in a quadratic equation and returns the discriminant.
 	public static double discriminant (double a, double b, double c) {
-		return (b * b) - (4 * a * c);
+		return (square(b)) - (4 * a * c);
 	}
 	
 	// This method takes the integer parts of a mixed number and returns an improper fraction in the form of a string.
@@ -52,12 +57,27 @@ public class Calculate {
 	/*This method takes the four integer parts of two binomial equations and its variable in the form of a string
 	 * and returns a quadratic equation in the form of a string. */
 	public static String foil (int a, int b, int c, int d, String variableLetter) {
-		return (a * c) + variableLetter + "^2 + " + ((a * d) + (b * c)) + variableLetter + " + " + (b * d);
+		if (((a * d) + (b * c)) < 0) {
+			if ((b * d) < 0) {
+				return (a * c) + variableLetter + "^2 - " + absValue((a * d) + (b * c)) + variableLetter + " - " + absValue(b * d);
+			} else {
+				return (a * c) + variableLetter + "^2 - " + absValue((a * d) + (b * c)) + variableLetter + " + " + (b * d);
+			}
+		} else {
+			if ((b * d) < 0) {
+				return (a * c) + variableLetter + "^2 + " + ((a * d) + (b * c)) + variableLetter + " - " + absValue(b * d);
+			} else { 
+				return (a * c) + variableLetter + "^2 + " + ((a * d) + (b * c)) + variableLetter + " + " + (b * d);
+			}
+		}
 	}
 	
 	/* This method takes two integers and determines whether the first one is divisible by the second.
 	* The output is in the form of a boolean. */
 	public static boolean isDivisibleBy (int dividend, int divisor) {
+		if (divisor == 0) {
+			throw new IllegalArgumentException("Cannot Divide By Zero");
+		}
 		return (dividend % divisor) == 0;
 	}
 	
@@ -70,6 +90,16 @@ public class Calculate {
 			return operand;
 		}
 	}
+	
+	// This method takes a integer and returns its absolute value
+		public static int absValue (int operand) {
+			if (operand < 0) {
+				return operand * -1;
+			}
+			else {
+				return operand;
+			}
+		}
 	
 	// This method takes two integers and returns the maximum between them. 
 	public static int max (int operand1, int operand2) {
@@ -107,9 +137,22 @@ public class Calculate {
 	
 	// This method takes a double and rounds it to two decimal places
 	public static double round2 (double operand) {
-		int times100 = (int) (operand * 100);
-		double rounded = (times100 / 100.00);
-		return rounded;
+		int times100 = (int) (operand * 1000);
+		int thousandths = times100 % 10;
+		times100 = times100/10;
+		if (thousandths >= 5) {
+			times100++;
+			double rounded = (times100 / 100.00);
+			return rounded;
+		} else if (thousandths <= -5) {
+			times100--;
+			double rounded = (times100 / 100.00);
+			return rounded;
+		} else {
+			double rounded = (times100 / 100.00);
+			return rounded;
+		}
+		
 	}
 	
 	//This method accepts and integer and a double and raises the double to the integer power. 
