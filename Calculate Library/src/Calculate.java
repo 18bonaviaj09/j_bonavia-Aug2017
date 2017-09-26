@@ -44,6 +44,11 @@ public class Calculate {
 		return (square(b)) - (4 * a * c);
 	}
 	
+	// This method takes the three coefficients in a quadratic equation and returns the discriminant.
+		public static double discriminant (int a, int b, int c) {
+			return (double) (square(b)) - (4 * a * c);
+		}
+	
 	// This method takes the integer parts of a mixed number and returns an improper fraction in the form of a string.
 	public static String toImproperFrac (int whole, int numerator, int denominator) {
 		return  ((whole * denominator) + numerator) + "/" + denominator;
@@ -111,6 +116,16 @@ public class Calculate {
 		}
 	}
 	
+	// This method takes two integers and returns the maximum between them. 
+		public static double max (double operand1, double operand2) {
+			if (operand1 < operand2) {
+				return operand2; 
+			}
+			else {
+				return operand1;
+			}
+		}
+	
 	// This method takes three integers and returns the maximum between them. 
 	public static int max (int operand1, int operand2, int operand3) {
 		if ((operand1 < operand2) && (operand3 < operand2)) {
@@ -135,6 +150,16 @@ public class Calculate {
 		}
 	}
 	
+	//This method takes two integers and returns the minimum between them 
+		public static double min (double operand1, double operand2) {
+			if (operand1 > operand2) {
+				return operand2; 
+			}
+			else {
+				return operand1;
+			}
+		}
+	
 	// This method takes a double and rounds it to two decimal places
 	public static double round2 (double operand) {
 		int times100 = (int) (operand * 1000);
@@ -158,6 +183,9 @@ public class Calculate {
 	//This method accepts and integer and a double and raises the double to the integer power. 
 	public static double exponent (double operand, int exponent) {
 		double awnser = 1.00;
+		if (exponent < 0) {
+			throw new IllegalArgumentException("Does not work for a negative exponent");
+		}
 		for (int i = 0; i < exponent; i++) {
 			awnser = awnser * operand;
 		}
@@ -168,6 +196,9 @@ public class Calculate {
 	// This method accepts an integer and returns its factorial as an integer. 
 	public static int factorial (int operand) {
 		int awnser = 1;
+		if (operand < 0) {
+			throw new IllegalArgumentException("Cannot find the factorial of a negative number.");
+		}
 		while (operand > 0) {
 			awnser = awnser * operand;
 			operand--;
@@ -209,10 +240,35 @@ public class Calculate {
 	// This method accepts accepts a double and returns an approximation of the square root of that double
 	public static double sqrt (double operand) {
 		double guess = operand/2;
+		if (operand < 0) {
+			throw new IllegalArgumentException("Cannot find the square root of a negative number.");
+		}
 		while ((guess * guess > operand + 0.005) || (guess * guess) < operand - 0.005) {
 			guess = (0.5 * ((operand / guess) + guess));
 		}
-		return round2 (guess);
+		return round2(guess);
+	}
+	
+	// This method accepts accepts a integer and returns an approximation of the square root of that double
+		public static double sqrt (int operand) {
+			double guess = operand/2;
+			if (operand < 0) {
+				throw new IllegalArgumentException("Cannot find the square root of a negative number.");
+			}
+			while ((guess * guess > operand + 0.005) || (guess * guess) < operand - 0.005) {
+				guess = (0.5 * ((operand / guess) + guess));
+			}
+			return round2(guess);
+		}
+	
+	// This method accepts the three integer coefficients of a quadratic equation and returns its real roots in a string.
+	public static String quadForm(int a, int b, int c) {
+		if (discriminant(a,b,c) < 0) {
+			return "no real roots";
+		}
+		double negative = ((b * -1) - sqrt(discriminant(a,b,c))) / (2 * a);
+		double positive = ((b * -1) + sqrt(discriminant(a,b,c))) / (2 * a); 
+		return round2(min(negative, positive)) + " and " + round2(max(negative, positive));
 	}
 
 }
