@@ -270,6 +270,16 @@ public class Calculate {
 		double positive = ((b * -1) + sqrt(discriminant(a,b,c))) / (2 * a); 
 		return round2(min(negative, positive)) + " and " + round2(max(negative, positive));
 	}
+	
+	// This method accepts the three integer coefficients of a quadratic equation and returns its real roots in a string.
+	public static String quadForm(double a, double b, double c) {
+		if (discriminant(a,b,c) < 0) {
+			return "no real roots";
+		}
+		double negative = ((b * -1) - sqrt(discriminant(a,b,c))) / (2 * a);
+		double positive = ((b * -1) + sqrt(discriminant(a,b,c))) / (2 * a); 
+		return round2(min(negative, positive)) + " and " + round2(max(negative, positive));
+	}
 
 }
 
