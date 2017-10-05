@@ -10,9 +10,9 @@ public class Calculate {
 	}
 	
 	// This method takes a double and returns its square.
-		public static double square (double operand) { 
-			return operand * operand;
-		}
+	public static double square (double operand) { 
+		return operand * operand;
+	}
 	
 	// This method takes an integer and returns its cube.
 	public static int cube (int operand) { 

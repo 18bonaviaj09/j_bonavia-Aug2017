@@ -3,8 +3,8 @@ import java.util.*;
 public class QuadraticClient {
 	public static void main (String [] args) {
 		boolean goOn = true;
+		Scanner inputVariables = new Scanner (System.in);
 		while (goOn == true) {
-			Scanner inputVariables = new Scanner (System.in);
 			System.out.println("Welcome to the Quadratic Describer.");
 			System.out.println("Provide Values for coefficients a, b, and c.");
 			System.out.print("a: ");

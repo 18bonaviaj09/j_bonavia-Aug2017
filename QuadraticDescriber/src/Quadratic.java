@@ -1,7 +1,55 @@
 
 public class Quadratic {
 	public static void quadrDescriber (double a, double b, double c) {
-		System.out.println(quadForm(a, b, c));
+		if (a == 0) {
+			System.out.println("Not a Quadratic Equation.");
+		} else {
+			System.out.println("Description of the Graph of: ");
+			System.out.println(quadEqu(a,b,c));
+			System.out.println("\nOpens: " + direction(a));
+			System.out.println("Axis of Symmetry: " + axisOfSymmetry(a,b,c));
+		}
+	}
+	
+	//This method takes the three coefficients of a quadratic equation and returns its axis of symmetry
+	
+	//This method takes the first coefficient of a quadratic equation and returns which direction they open
+	public static String direction(double a) {
+		if (a< 0) {
+			return "Down";
+		} else {
+			return "Up";
+		}
+	}
+	
+	//This method takes the three coefficients of a quadratic equation and turns them into a String equation
+	public static String quadEqu(double a, double b, double c) {
+		if (b < 0) {
+			if (c < 0) {
+				return a + " x^2 - " + absValue(b) + " x - " + absValue(c);
+			} else if (c == 0){
+				return a + " x^2 - " + absValue(b) + " x";
+			} else {
+				return a + " x^2 - " + absValue(b) + " x + " + c;
+			}
+		} else if (b == 0) {
+			if (c < 0) {
+				return a + " x^2 - " + absValue(c);
+			} else if (c == 0){
+				return a + " x^2";
+			} else {
+				return a + " x^2 + " + c;
+			}
+		} else {
+			if (c < 0) {
+				return a + " x^2 + " + b + " x - " + absValue(c);
+			} else if (c == 0) {
+				return a + " x^2 + " + b + " x";
+			} else {
+				return a + " x^2 + " + b + " x + " + c;
+			}
+		}
+			
 	}
 	
 	// This method accepts the three integer coefficients of a quadratic equation and returns its real roots in a string.
@@ -69,4 +117,14 @@ public class Quadratic {
 		}
 		return round2(guess);
 	}
+	
+	// This method takes a integer and returns its absolute value
+	public static double absValue (double operand) {
+			if (operand < 0) {
+				return operand * -1;
+			}
+			else {
+				return operand;
+			}
+		}
 }
