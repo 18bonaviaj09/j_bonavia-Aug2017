@@ -2,16 +2,27 @@
 public class Quadratic {
 	public static void quadrDescriber (double a, double b, double c) {
 		if (a == 0) {
-			System.out.println("Not a Quadratic Equation.");
+			System.out.println("\nNot a Quadratic Equation.");
 		} else {
-			System.out.println("Description of the Graph of: ");
-			System.out.println(quadEqu(a,b,c));
+			System.out.println("\nDescription of the Graph of: ");
+			System.out.println(" y = " + quadEqu(a,b,c));
 			System.out.println("\nOpens: " + direction(a));
-			System.out.println("Axis of Symmetry: " + axisOfSymmetry(a,b,c));
+			System.out.println("Axis of Symmetry: " + axisOfSymmetry(a,b));
+			System.out.println("Vertex: (" + axisOfSymmetry(a,b) + ", " + yValue(a,b,c) + ")");
+			System.out.println("x-intercept(s): " + quadForm(a,b,c));
+			System.out.println("y-intercept: " + c);
 		}
 	}
 	
-	//This method takes the three coefficients of a quadratic equation and returns its axis of symmetry
+	//This method takes the three coefficients of a quadratic equation and returns the y value of the vertex.
+	public static double yValue(double a, double b, double c) {
+		return (a * (axisOfSymmetry(a,b) * axisOfSymmetry(a,b))) + (b * axisOfSymmetry(a,b)) + c;
+	}
+	
+	//This method takes the three coefficients of a quadratic equation and returns its axis of symmetry.
+	public static double axisOfSymmetry(double a, double b) {
+		return (b * -1) / (2 * a);
+	}
 	
 	//This method takes the first coefficient of a quadratic equation and returns which direction they open
 	public static String direction(double a) {
@@ -55,7 +66,7 @@ public class Quadratic {
 	// This method accepts the three integer coefficients of a quadratic equation and returns its real roots in a string.
 	public static String quadForm(double a, double b, double c) {
 		if (discriminant(a,b,c) < 0) {
-			return "no real roots";
+			return "None";
 		}
 		double negative = ((b * -1) - sqrt(discriminant(a,b,c))) / (2 * a);
 		double positive = ((b * -1) + sqrt(discriminant(a,b,c))) / (2 * a); 
@@ -69,7 +80,7 @@ public class Quadratic {
 	
 	// This method takes two integers and returns the maximum between them. 
 	public static double max (double operand1, double operand2) {
-		if (operand1 < operand2) {
+		if (absValue(operand1) < absValue(operand2)) {
 			return operand2; 
 		}
 		else {
@@ -79,7 +90,7 @@ public class Quadratic {
 	
 	//This method takes two integers and returns the minimum between them 
 	public static double min (double operand1, double operand2) {
-			if (operand1 > operand2) {
+			if (absValue(operand1) > absValue(operand2)) {
 				return operand2; 
 			}
 			else {
