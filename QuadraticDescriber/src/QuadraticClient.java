@@ -13,10 +13,10 @@ public class QuadraticClient {
 			double b = inputVariables.nextDouble();
 			System.out.print("c: ");
 			double c = inputVariables.nextDouble();
-			Quadratic.quadrDescriber(a, b, c);
+			System.out.println(Quadratic.quadrDescriber(a, b, c));
 			System.out.println("\nDo you want to keep going? (type \"quit\" to end)");
 			String shouldIContinue = inputVariables.next();
-			if (shouldIContinue.equals("quit")){
+			if (shouldIContinue.equals("quit") || shouldIContinue.equals("q")){
 					goOn = false;
 			} else {
 				goOn = true;	

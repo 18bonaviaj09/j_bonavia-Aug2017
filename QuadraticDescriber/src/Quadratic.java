@@ -1,16 +1,17 @@
 
 public class Quadratic {
-	public static void quadrDescriber (double a, double b, double c) {
+	public static String quadrDescriber (double a, double b, double c) {
 		if (a == 0) {
-			System.out.println("\nNot a Quadratic Equation.");
+			return "\nNot a Quadratic Equation.";
 		} else {
-			System.out.println("\nDescription of the Graph of: ");
-			System.out.println(" y = " + quadEqu(a,b,c));
-			System.out.println("\nOpens: " + direction(a));
-			System.out.println("Axis of Symmetry: " + axisOfSymmetry(a,b));
-			System.out.println("Vertex: (" + axisOfSymmetry(a,b) + ", " + yValue(a,b,c) + ")");
-			System.out.println("x-intercept(s): " + quadForm(a,b,c));
-			System.out.println("y-intercept: " + c);
+			String output = "\nDescription of the Graph of: ";
+			output = output + ("\ny = " + quadEqu(a,b,c));
+			output = output + ("\n\nOpens: " + direction(a));
+			output = output + ("\nAxis of Symmetry: " + axisOfSymmetry(a,b));
+			output = output + ("\nVertex: (" + axisOfSymmetry(a,b) + ", " + yValue(a,b,c) + ")");
+			output = output + ("\nx-intercept(s): " + quadForm(a,b,c));
+			output = output + ("\ny-intercept: " + c);
+			return output;
 		}
 	}
 	
@@ -21,7 +22,12 @@ public class Quadratic {
 	
 	//This method takes the three coefficients of a quadratic equation and returns its axis of symmetry.
 	public static double axisOfSymmetry(double a, double b) {
-		return (b * -1) / (2 * a);
+		double rawValue = (b * -1) / (2 * a);
+		if (absValue(rawValue) < 0.0005) {
+			return 0.0;
+		} else {
+			return rawValue;
+		}
 	}
 	
 	//This method takes the first coefficient of a quadratic equation and returns which direction they open
@@ -70,7 +76,11 @@ public class Quadratic {
 		}
 		double negative = ((b * -1) - sqrt(discriminant(a,b,c))) / (2 * a);
 		double positive = ((b * -1) + sqrt(discriminant(a,b,c))) / (2 * a); 
-		return round2(min(negative, positive)) + " and " + round2(max(negative, positive));
+		if (negative == positive) {
+			return "" + positive;
+		} else {
+			return round2(min(negative, positive)) + " and " + round2(max(negative, positive));
+		}
 	}
 	
 	// This method takes the three coefficients in a quadratic equation and returns the discriminant.
