@@ -1,4 +1,5 @@
-
+// Joseph Bonavia 
+// This class takes user input and sends it to the Quadratic Describer method
 import java.util.*;
 public class QuadraticClient {
 	public static void main (String [] args) {

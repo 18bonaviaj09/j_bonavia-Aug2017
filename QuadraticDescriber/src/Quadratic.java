@@ -1,4 +1,5 @@
-
+// Joseph Bonavia
+// This class creates and returns a string that describes the quadratic equation sent to it 
 public class Quadratic {
 	public static String quadrDescriber (double a, double b, double c) {
 		if (a == 0) {
