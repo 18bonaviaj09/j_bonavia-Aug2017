@@ -1,3 +1,6 @@
+// Joseph Bonavia, 10/30/2017
+// This project takes in the ingredients of sandwiches and outputs whats between the bread. 
+
 import java.util.*;
 public class Split {
 
