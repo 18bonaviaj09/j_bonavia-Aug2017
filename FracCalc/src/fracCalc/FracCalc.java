@@ -1,29 +1,161 @@
 package fracCalc;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class FracCalc {
 
     public static void main(String[] args) {
     	Scanner fractionInput = new Scanner(System.in);
-    	System.out.println("Give me an equation.");
-    	String equation = fractionInput.nextLine();
-    	System.out.println(produceAnswer(equation));
+    	boolean done = false;
+    	while (!done == true) {
+    		System.out.println("Give me an equation.");
+    		String equation = fractionInput.nextLine();
+    		System.out.println(produceAnswer(equation));
+    		System.out.println("\n Would you like to enter another equation? (enter \"quit\" to end)");
+    		String quitting = fractionInput.nextLine();
+    		if (quitting.equals("quit")) {
+    			done = true;
+    		}
+    	}
     }
     
-    // ** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
-    // This function takes a String 'input' and produces the result
-    //
-    // input is a fraction string that needs to be evaluated.  For your program, this will be the user input.
-    //      e.g. input ==> "1/2 + 3/4"
-    //        
-    // The function should return the result of the fraction after it has been calculated
-    //      e.g. return ==> "1_1/4"
     public static String produceAnswer(String input) { 
 		String[] inputArray = input.split(" ");
-		return inputArray[2];
+		String operand1 = inputArray[0];
+		String operator = inputArray[1];
+		String operand2 = inputArray[2];
+		int[] first = parsingMethod(operand1);
+		int[] second = parsingMethod(operand2);
+		negativeCorrector(first);
+		negativeCorrector(second);
+		System.out.println(Arrays.toString(first));
+		System.out.println(Arrays.toString(second));
+		int[] output = performOp(operator, first, second);
+		return stringConstructor(output);
     }
-
-    // TODO: Fill in the space below with any helper methods that you think you will need
     
+    public static int[] parsingMethod(String operand) {
+    	String[] array1 = operand.split("_");
+    	if (array1.length == 2) {
+    		String[] array2 = array1[1].split("/");
+    		int[] numArray = {intoInt(array1[0]), intoInt(array2[0]), intoInt(array2[1])};
+    		return numArray;
+    	} else {
+    		String[] array2 = array1[0].split("/");
+    		if (array2.length == 2) {
+    			int[] numArray = {0, intoInt(array2[0]), intoInt(array2[1])};
+    			return numArray;
+    		} else {
+    			int[] numArray = {intoInt(array1[0]), 0, 1};
+    			return numArray;
+    		}
+    	}
+    }
+    
+    public static int intoInt(String input) {
+    	if (input.indexOf("-") >= 0) {
+    		String number = input.substring((input.indexOf("-") + 1), input.length());
+    		int i = 0;
+    		while (!number.equals("" + i)) {
+    			i++;
+    		}
+    		return i * -1;
+    	} else {
+    		int i = 0;
+    		while (!input.equals("" + i)) {
+    			i++;
+    		}
+    		return i;
+    	}
+    }
+    
+    public static int[] performOp(String operator, int[] operand1, int[] operand2) {
+    	int[] output = new int[3];
+    	if (operator.equals("+")) {
+    		output = addMethod(operand1, operand2);
+    	} else if (operator.equals("-")) {
+    		output = subMethod(operand1, operand2);
+    	} else if (operator.equals("*")) {
+    		output = multMethod(operand1, operand2);
+    	} else {
+    		output = divMethod(operand1, operand2);
+    	}
+    	return output;
+    }
+    
+    public static int[] addMethod(int[] operand1, int[] operand2) {
+    	int[] impFra1 = toImpFrac(operand1);
+    	int[] impFra2 = toImpFrac(operand2);
+    	int[] output = new int[3];
+    	output[1] = (impFra1[0] * impFra2[1]) + (impFra2[0] * impFra1[1]);
+    	output[2] = impFra1[1] * impFra2[1];
+    	simplifier(output);
+    	return output;
+    }
+    
+    public static int[] subMethod(int[] operand1, int[] operand2) {
+    	int[] subVersion = new int[3];
+    	subVersion[0] = operand2[0] * -1;
+    	subVersion[1] = operand2[1] * -1;
+    	subVersion[2] = operand2[2];
+    	int[] output = addMethod(operand1, subVersion);
+    	simplifier(output);
+    	return output;
+    }
+    		
+    public static int[] multMethod(int[] operand1, int[] operand2) {
+    	int[] impFra1 = toImpFrac(operand1);
+    	int[] impFra2 = toImpFrac(operand2);
+    	int[] output = new int[3];
+    	output[1] = impFra1[0] * impFra2[0];
+    	output[2] = impFra1[1] * impFra2[1];
+    	simplifier(output);
+    	return output;
+    }
+    		
+    public static int[] divMethod(int[] operand1, int[] operand2) {
+    	int[] output = new int[3];
+    	if (impFra2[1] < 0) {
+    	} else {
+    	}
+    	return output;
+    }
+    
+    public static int[] toImpFrac(int[] operand) {
+    	int[] output = new int[2];
+    		int numerator = (operand[0] * operand[2]) + operand [1];
+    		output[0] = numerator;
+    		output[1] = operand[2];
+    	return output;
+	}
+    public static void simplifier(int[] operand) {
+    	
+    }
+    
+    public static String stringConstructor(int[] operand) {
+    	String output = "";
+    	if (operand[0] == 0 && operand[1] == 0) {
+    		output += "0";
+    	} else if (operand[0] == 0) {
+    		output += operand[1];
+    		output += "/";
+    		output += operand[2];
+    	} else if (operand[1] == 0) {
+    		output += operand[0];
+    	} else {
+    		output += operand[0];
+    		output += "_";
+    		output += operand[1];
+    		output += "/";
+    		output += operand[2];
+    	}
+    	return output;
+    }
+    
+    public static void negativeCorrector(int[] operand) {
+    	if (operand[0] < 0) {
+    		operand[1] *= -1;
+    	}
+    }
 }
