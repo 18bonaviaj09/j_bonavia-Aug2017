@@ -29,8 +29,6 @@ public class FracCalc {
 		int[] second = parsingMethod(operand2);
 		negativeCorrector(first);
 		negativeCorrector(second);
-		System.out.println(Arrays.toString(first));
-		System.out.println(Arrays.toString(second));
 		int[] output = performOp(operator, first, second);
 		return stringConstructor(output);
     }
@@ -116,10 +114,20 @@ public class FracCalc {
     		
     public static int[] divMethod(int[] operand1, int[] operand2) {
     	int[] output = new int[3];
-    	if (impFra2[1] < 0) {
+    	int[] impFra2 = toImpFrac(operand2);
+    	int divVersion1;
+    	int divVersion2;
+    	if (impFra2[0] < 0) {
+    		divVersion1 = impFra2[1] * -1;
+    		divVersion2 = impFra2[0] * -1;
     	} else {
+    		divVersion1 = impFra2[1];
+    		divVersion2 = impFra2[0];
     	}
-    	return output;
+    	output[1] = divVersion1;
+    	output[2] = divVersion2;
+    	int[] multOutput = multMethod(operand1, output);
+    	return multOutput;
     }
     
     public static int[] toImpFrac(int[] operand) {
@@ -129,8 +137,20 @@ public class FracCalc {
     		output[1] = operand[2];
     	return output;
 	}
+    
     public static void simplifier(int[] operand) {
-    	
+    	int gcf = gcfFind(operand);
+    	operand[1] /= gcf;
+    	operand[2] /= gcf;
+    	if (absVal(operand[1]) >= absVal(operand[2])) {
+    		int newNum = operand[1] % operand[2];
+    		int plusWhole = operand[1] / operand[2];
+    		operand[0] += plusWhole;
+    		operand[1] = newNum;
+    	}
+    	if (operand[1] < 0) {
+    		operand[1] *= -1;
+    	}
     }
     
     public static String stringConstructor(int[] operand) {
@@ -158,4 +178,30 @@ public class FracCalc {
     		operand[1] *= -1;
     	}
     }
+    
+    public static int gcfFind(int[] operand) {
+    	int gcf = 1;
+    	int start = 0;
+    	if (absVal(operand[1]) >= absVal(operand[2])) {
+    		start = operand[2];
+    	} else {
+    		start = operand[1];
+    	}
+    	for (int i = start; i > 1; i--) {
+			if (operand[1] % i == 0 && operand[2] % i == 0) {
+				gcf = i;
+				i = 2;
+			}
+    	}
+    	return gcf;
+    }
+    
+    public static int absVal(int operand) {
+    	if (operand < 0) {
+    		return operand * -1;
+    	} else {
+    		return operand;
+    	}
+    }
+    
 }
