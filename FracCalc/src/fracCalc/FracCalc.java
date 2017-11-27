@@ -142,13 +142,11 @@ public class FracCalc {
     	int gcf = gcfFind(operand);
     	operand[1] /= gcf;
     	operand[2] /= gcf;
-    	if (absVal(operand[1]) >= absVal(operand[2])) {
-    		int newNum = operand[1] % operand[2];
-    		int plusWhole = operand[1] / operand[2];
-    		operand[0] += plusWhole;
-    		operand[1] = newNum;
-    	}
-    	if (operand[1] < 0) {
+    	int newNum = operand[1] % operand[2];
+    	int plusWhole = operand[1] / operand[2];
+    	operand[0] += plusWhole;
+    	operand[1] = newNum;
+    	if (operand[1] < 0 && operand[0] < 0) {
     		operand[1] *= -1;
     	}
     }
