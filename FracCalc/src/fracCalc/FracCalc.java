@@ -181,14 +181,14 @@ public class FracCalc {
     	int gcf = 1;
     	int start = 0;
     	if (absVal(operand[1]) >= absVal(operand[2])) {
-    		start = operand[2];
+    		start = absVal(operand[2]);
     	} else {
-    		start = operand[1];
+    		start = absVal(operand[1]);
     	}
     	for (int i = start; i > 1; i--) {
-			if (operand[1] % i == 0 && operand[2] % i == 0) {
+			if (absVal(operand[1]) % i == 0 && absVal(operand[2]) % i == 0) {
 				gcf = i;
-				i = 2;
+				i = 1;
 			}
     	}
     	return gcf;
