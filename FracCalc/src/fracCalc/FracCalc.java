@@ -11,7 +11,7 @@ public class FracCalc {
     	while (!done == true) {
     		System.out.println("Give me an equation.");
     		String equation = fractionInput.nextLine();
-    		System.out.println(produceAnswer(equation));
+    		System.out.println("\n" + produceAnswer(equation));
     		System.out.println("\n Would you like to enter another equation? (enter \"quit\" to end)");
     		String quitting = fractionInput.nextLine();
     		if (quitting.equals("quit")) {
@@ -22,14 +22,21 @@ public class FracCalc {
     
     public static String produceAnswer(String input) { 
 		String[] inputArray = input.split(" ");
-		String operand1 = inputArray[0];
 		String operator = inputArray[1];
-		String operand2 = inputArray[2];
-		int[] first = parsingMethod(operand1);
-		int[] second = parsingMethod(operand2);
+		int[] first = parsingMethod(inputArray[0]);
+		int[] second = parsingMethod(inputArray[2]);
 		negativeCorrector(first);
 		negativeCorrector(second);
 		int[] output = performOp(operator, first, second);
+		if (inputArray.length > 3) {
+			for (int i = 3; i < inputArray.length - 1; i += 2) {
+				int[] nextOperand = parsingMethod(inputArray[i + 1]);
+				negativeCorrector(nextOperand);
+				negativeCorrector(output);
+				String nextOperator = inputArray[i];
+				output = performOp(nextOperator, output, nextOperand);
+			}
+		}
 		return stringConstructor(output);
     }
     

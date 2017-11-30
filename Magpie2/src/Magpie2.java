@@ -1,3 +1,5 @@
+// Joseph Bonavia 
+// This Class creates the output for the MagpieRunner2 Class
 
 public class Magpie2 {
 
