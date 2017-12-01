@@ -1,3 +1,6 @@
+// Joseph Bonavia 
+//This Program takes in user input in the form of an equation of fractions and outputs an answer.
+
 package fracCalc;
 
 import java.util.Arrays;
@@ -25,14 +28,10 @@ public class FracCalc {
 		String operator = inputArray[1];
 		int[] first = parsingMethod(inputArray[0]);
 		int[] second = parsingMethod(inputArray[2]);
-		negativeCorrector(first);
-		negativeCorrector(second);
 		int[] output = performOp(operator, first, second);
 		if (inputArray.length > 3) {
 			for (int i = 3; i < inputArray.length - 1; i += 2) {
 				int[] nextOperand = parsingMethod(inputArray[i + 1]);
-				negativeCorrector(nextOperand);
-				negativeCorrector(output);
 				String nextOperator = inputArray[i];
 				output = performOp(nextOperator, output, nextOperand);
 			}
@@ -77,6 +76,8 @@ public class FracCalc {
     
     public static int[] performOp(String operator, int[] operand1, int[] operand2) {
     	int[] output = new int[3];
+    	negativeCorrector(operand1);
+    	negativeCorrector(operand2);
     	if (operator.equals("+")) {
     		output = addMethod(operand1, operand2);
     	} else if (operator.equals("-")) {
