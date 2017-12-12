@@ -1,3 +1,5 @@
+// Joseph Bonavia
+
 package fracCalc;
 
 public class Fraction {
@@ -7,6 +9,12 @@ public class Fraction {
 	
 	public Fraction(String fractionStr) {
 		parsingMethod(fractionStr);
+	}
+	
+	public Fraction() {
+		whole = 0;
+		numerator = 0;
+		denominator = 1;
 	}
 	
 	private void parsingMethod(String operand) {
@@ -31,14 +39,24 @@ public class Fraction {
     }
 	
 	public String toString() {
-		String output = "whole:";
-		output += whole;
-		output += " numerator:";
-		output += numerator;
-		output += " denominator:";
-		output += denominator;
-		return output;
-	}
+    	String output = "";
+    	if (whole == 0 && numerator == 0) {
+    		output += "0";
+    	} else if (whole == 0) {
+    		output += numerator;
+    		output += "/";
+    		output += denominator;
+    	} else if (numerator == 0) {
+    		output += whole;
+    	} else {
+    		output += whole;
+    		output += "_";
+    		output += numerator;
+    		output += "/";
+    		output += denominator;
+    	}
+    	return output;
+    }
     
     private int intoInt(String input) {
     	if (input.indexOf("-") >= 0) {
@@ -54,6 +72,79 @@ public class Fraction {
     			i++;
     		}
     		return i;
+    	}
+    }
+    
+    public int getNum() {
+    	return numerator;
+    }
+    
+    public int getDenom() {
+    	return denominator;
+    }
+
+	public int getWhole() {
+		return whole;
+	}
+	
+	public void setNum(int newNum) {
+		numerator = newNum;
+	}
+	
+	public void setDenom(int newDenom) {
+		denominator = newDenom;
+	}
+	
+	public void setWhole(int newWhole) {
+		whole = newWhole;
+	}
+	
+	public void toImpFrac() {
+    		numerator = (whole * denominator) + numerator;
+    		whole = 0;
+	}
+	
+	public void simplifier() {
+    	int gcf = gcfFind();
+    	numerator /= gcf;
+    	denominator /= gcf;
+    	int newNum = numerator % denominator;
+    	int plusWhole = numerator / denominator;
+    	whole += plusWhole;
+    	numerator = newNum;
+    	if (numerator < 0 && whole < 0) {
+    		numerator *= -1;
+    	}
+    }
+	
+	public void negativeCorrector() {
+    	if (whole < 0) {
+    		numerator *= -1;
+    	}
+    }
+	
+	private int gcfFind() {
+    	int gcf = 1;
+    	int start = 0;
+    	if (absVal(numerator) >= absVal(denominator)) {
+    		start = absVal(denominator);
+    	} else {
+    		start = absVal(numerator);
+    	}
+    	for (int i = start; i > 1; i--) {
+			if (absVal(numerator) % i == 0 && absVal(denominator) % i == 0) {
+				gcf = i;
+				i = 1;
+			}
+    	}
+    	return gcf;
+    }
+	
+	private int absVal(int operand) {
+    	if (operand < 0) {
+    		return operand * -1;
+    	} else {
+    		return operand;
     	}
     }
 }

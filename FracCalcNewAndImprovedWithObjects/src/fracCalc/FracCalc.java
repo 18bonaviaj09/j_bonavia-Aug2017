@@ -28,22 +28,21 @@ public class FracCalc {
 		String operator = inputArray[1];
 		Fraction frac1 = new Fraction(inputArray[0]);
 		Fraction frac2 = new Fraction(inputArray[2]);
-//		int[] output = performOp(operator, first, second);
-//		if (inputArray.length > 3) {
-//			for (int i = 3; i < inputArray.length - 1; i += 2) {
-//				int[] nextOperand = parsingMethod(inputArray[i + 1]);
-//				String nextOperator = inputArray[i];
-//				output = performOp(nextOperator, output, nextOperand);
-//			}
-//		}
-//		return stringConstructor(output);
-		return frac2.toString();
+		Fraction output = performOp(operator, frac1, frac2);
+		if (inputArray.length > 3) {
+			for (int i = 3; i < inputArray.length - 1; i += 2) {
+				Fraction nextOperand = new Fraction(inputArray[i + 1]);
+				String nextOperator = inputArray[i];
+			output = performOp(nextOperator, output, nextOperand);
+			}
+		}
+		return output.toString();
     }
     
-    public static int[] performOp(String operator, int[] operand1, int[] operand2) {
-    	int[] output = new int[3];
-    	negativeCorrector(operand1);
-    	negativeCorrector(operand2);
+    public static Fraction performOp(String operator, Fraction operand1, Fraction operand2) {
+    	Fraction output = new Fraction();
+    	operand1.negativeCorrector();
+    	operand2.negativeCorrector();
     	if (operator.equals("+")) {
     		output = addMethod(operand1, operand2);
     	} else if (operator.equals("-")) {
@@ -56,124 +55,51 @@ public class FracCalc {
     	return output;
     }
     
-    public static int[] addMethod(int[] operand1, int[] operand2) {
-    	int[] impFra1 = toImpFrac(operand1);
-    	int[] impFra2 = toImpFrac(operand2);
-    	int[] output = new int[3];
-    	output[1] = (impFra1[0] * impFra2[1]) + (impFra2[0] * impFra1[1]);
-    	output[2] = impFra1[1] * impFra2[1];
-    	simplifier(output);
+    public static Fraction addMethod(Fraction operand1, Fraction operand2) {
+    	operand1.toImpFrac();
+    	operand2.toImpFrac();
+    	Fraction output = new Fraction();
+    	output.setNum((operand1.getNum() * operand2.getDenom()) + (operand2.getNum() * operand1.getDenom()));
+    	output.setDenom(operand1.getDenom() * operand2.getDenom());
+    	output.simplifier();
     	return output;
     }
     
-    public static int[] subMethod(int[] operand1, int[] operand2) {
-    	int[] subVersion = new int[3];
-    	subVersion[0] = operand2[0] * -1;
-    	subVersion[1] = operand2[1] * -1;
-    	subVersion[2] = operand2[2];
-    	int[] output = addMethod(operand1, subVersion);
-    	simplifier(output);
+    public static Fraction subMethod(Fraction operand1, Fraction operand2) {
+    	Fraction subVersion = new Fraction();
+    	subVersion.setWhole(operand2.getWhole() * -1);
+    	subVersion.setNum(operand2.getNum() * -1);
+    	subVersion.setDenom(operand2.getDenom());
+    	Fraction output = addMethod(operand1, subVersion);
     	return output;
     }
     		
-    public static int[] multMethod(int[] operand1, int[] operand2) {
-    	int[] impFra1 = toImpFrac(operand1);
-    	int[] impFra2 = toImpFrac(operand2);
-    	int[] output = new int[3];
-    	output[1] = impFra1[0] * impFra2[0];
-    	output[2] = impFra1[1] * impFra2[1];
-    	simplifier(output);
+    public static Fraction multMethod(Fraction operand1, Fraction operand2) {
+    	operand1.toImpFrac();
+    	operand2.toImpFrac();
+    	Fraction output = new Fraction();
+    	output.setNum(operand1.getNum() * operand2.getNum());
+    	output.setDenom(operand1.getDenom() * operand2.getDenom());
+    	output.simplifier();
     	return output;
     }
     		
-    public static int[] divMethod(int[] operand1, int[] operand2) {
-    	int[] output = new int[3];
-    	int[] impFra2 = toImpFrac(operand2);
+    public static Fraction divMethod(Fraction operand1, Fraction operand2) {
+    	Fraction output = new Fraction();
+    	operand2.toImpFrac();
     	int divVersion1;
     	int divVersion2;
-    	if (impFra2[0] < 0) {
-    		divVersion1 = impFra2[1] * -1;
-    		divVersion2 = impFra2[0] * -1;
+    	if (operand2.getNum() < 0) {
+    		divVersion1 = operand2.getDenom() * -1;
+    		divVersion2 = operand2.getNum() * -1;
     	} else {
-    		divVersion1 = impFra2[1];
-    		divVersion2 = impFra2[0];
+    		divVersion1 = operand2.getDenom();
+    		divVersion2 = operand2.getNum();
     	}
-    	output[1] = divVersion1;
-    	output[2] = divVersion2;
-    	int[] multOutput = multMethod(operand1, output);
+    	output.setNum(divVersion1);
+    	output.setDenom(divVersion2);
+    	Fraction multOutput = multMethod(operand1, output);
     	return multOutput;
-    }
-    
-    public static int[] toImpFrac(int[] operand) {
-    	int[] output = new int[2];
-    		int numerator = (operand[0] * operand[2]) + operand [1];
-    		output[0] = numerator;
-    		output[1] = operand[2];
-    	return output;
-	}
-    
-    public static void simplifier(int[] operand) {
-    	int gcf = gcfFind(operand);
-    	operand[1] /= gcf;
-    	operand[2] /= gcf;
-    	int newNum = operand[1] % operand[2];
-    	int plusWhole = operand[1] / operand[2];
-    	operand[0] += plusWhole;
-    	operand[1] = newNum;
-    	if (operand[1] < 0 && operand[0] < 0) {
-    		operand[1] *= -1;
-    	}
-    }
-    
-    public static String stringConstructor(int[] operand) {
-    	String output = "";
-    	if (operand[0] == 0 && operand[1] == 0) {
-    		output += "0";
-    	} else if (operand[0] == 0) {
-    		output += operand[1];
-    		output += "/";
-    		output += operand[2];
-    	} else if (operand[1] == 0) {
-    		output += operand[0];
-    	} else {
-    		output += operand[0];
-    		output += "_";
-    		output += operand[1];
-    		output += "/";
-    		output += operand[2];
-    	}
-    	return output;
-    }
-    
-    public static void negativeCorrector(int[] operand) {
-    	if (operand[0] < 0) {
-    		operand[1] *= -1;
-    	}
-    }
-    
-    public static int gcfFind(int[] operand) {
-    	int gcf = 1;
-    	int start = 0;
-    	if (absVal(operand[1]) >= absVal(operand[2])) {
-    		start = absVal(operand[2]);
-    	} else {
-    		start = absVal(operand[1]);
-    	}
-    	for (int i = start; i > 1; i--) {
-			if (absVal(operand[1]) % i == 0 && absVal(operand[2]) % i == 0) {
-				gcf = i;
-				i = 1;
-			}
-    	}
-    	return gcf;
-    }
-    
-    public static int absVal(int operand) {
-    	if (operand < 0) {
-    		return operand * -1;
-    	} else {
-    		return operand;
-    	}
     }
     
 }
