@@ -100,7 +100,7 @@ public class Fraction {
 	}
 	
 	public void toImpFrac() {
-    		numerator = (whole * denominator) + numerator;
+    		numerator += (whole * denominator);
     		whole = 0;
 	}
 	
