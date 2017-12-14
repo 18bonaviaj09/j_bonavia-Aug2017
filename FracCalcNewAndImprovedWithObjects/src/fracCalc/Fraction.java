@@ -1,4 +1,5 @@
 // Joseph Bonavia
+// Object Class for Frac Calc
 
 package fracCalc;
 
