@@ -48,16 +48,7 @@ public class TriangularPrism extends Prism{
 	}
 	
 	public double calcPerimeter() {
-		return (3 * getHeight()) + (2 * getPBase());
+		return getPBase();
 	}
-	
-	public double calcVolume() {
-		return calcAreaOfBase() * getHeight();
-	}
-	
-	public double calcSA() {
-		return (2 * calcAreaOfBase()) + (getHeight() * getPBase());
-	}
-	
 	
 }

@@ -12,14 +12,6 @@ public class Cylinder extends Prism {
 		radius = r;
 	}
 	
-	private double getD() {
-		return 2 * radius;
-	}
-	
-	private double getCircumferance() {
-		return Math.PI * getD();
-	}
-	
 	public double getRadius() {
 		return radius;
 	}
@@ -29,14 +21,7 @@ public class Cylinder extends Prism {
 	}
 	
 	public double calcPerimeter() {
-		return (getCircumferance()) * 2;
+		return Math.PI * 2 * radius;
 	}
 	
-	public double calcVolume() {
-		return calcAreaOfBase() * getHeight();
-	}
-	
-	public double calcSA() {
-		return (getCircumferance() * getHeight()) + (2 * calcAreaOfBase());
-	}
 }

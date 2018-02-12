@@ -27,15 +27,7 @@ public class RectangularPrism extends Prism {
 	}
 	
 	public double calcPerimeter() {
-		return (4 * (getHeight() + length + width));
-	}
-	
-	public double calcVolume() {
-		return (width * length * getHeight());
-	}
-	
-	public double calcSA() {
-		return 2 * (calcAreaOfBase() + (getHeight() * (length + width)));
+		return 2 * (length + width);
 	}
 }
 
