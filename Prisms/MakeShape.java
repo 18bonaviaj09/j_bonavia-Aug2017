@@ -16,10 +16,30 @@ public class MakeShape {
 		
 		for (int i=0; i<prisms.length; i++)
 		{
-			System.out.println("The volume of p" + (i+1) +": " + prisms[i].calcVolume());
-			System.out.println("The surface area of p" + (i+1) +": " + prisms[i].calcSA());
+			System.out.println("The volume of p" + (i+1) +": " + round(prisms[i].calcVolume()));
+			System.out.println("The surface area of p" + (i+1) +": " + round(prisms[i].calcSA()));
 			System.out.println();
+		}		
+		
+	}
+	
+	public static double round (double operand) {
+		int times100 = (int) (operand * 100);
+		int thousandths = times100 % 10;
+		times100 = times100/10;
+		if (thousandths >= 5) {
+			times100++;
+			double rounded = (times100 / 10.00);
+			return rounded;
+		} else if (thousandths <= -5) {
+			times100--;
+			double rounded = (times100 / 10.00);
+			return rounded;
+		} else {
+			double rounded = (times100 / 10.00);
+			return rounded;
 		}
+		
 	}
 
 }

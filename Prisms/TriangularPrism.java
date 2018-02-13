@@ -34,12 +34,8 @@ public class TriangularPrism extends Prism{
 		return sideC;
 	}
 	
-	private double getPBase() {
-		return sideA + sideB + sideC;
-	}
-	
 	private double getS() {
-		return getPBase() / 2;
+		return calcPerimeter() / 2;
 	}
 	
 	public double calcAreaOfBase() {
@@ -48,7 +44,7 @@ public class TriangularPrism extends Prism{
 	}
 	
 	public double calcPerimeter() {
-		return getPBase();
+		return sideA + sideB + sideC;
 	}
 	
 }
