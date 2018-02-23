@@ -4,6 +4,10 @@
  * Provide a constructor and the methods required by its abstract superclass.  
  */
 
+// Joseph Bonavia 
+// First Period
+// This class is the Rectangular Prism Class in the Prism project
+
 public class RectangularPrism extends Prism {
 	private double length;
 	private double width;

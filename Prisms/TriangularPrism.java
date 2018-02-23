@@ -9,6 +9,9 @@
  * It uses half the perimeter.  (Why might you want to use 0.5 instead of 1/2?)
  */
 
+// Joseph Bonavia 
+// First Period
+// This class is the Triangular Prism Class in the Prism project
 
 public class TriangularPrism extends Prism{
 	private double sideA;
