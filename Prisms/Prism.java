@@ -10,7 +10,7 @@
  */
 
 
-public abstract class Prism  {
+public abstract class Prism extends ThreeDShape {
 	private double height;
 	
 	public Prism(double h) {
@@ -26,30 +26,11 @@ public abstract class Prism  {
 	public abstract double calcPerimeter();
 	
 	public double calcVolume() {
-		return round(calcAreaOfBase() * height);
+		return calcAreaOfBase() * height;
 	}
 	
 	public double calcSA() {
-		return round((2 * calcAreaOfBase()) + (calcPerimeter() * height));
-	}
-	
-	private double round (double operand) {
-		int times100 = (int) (operand * 100);
-		int thousandths = times100 % 10;
-		times100 = times100/10;
-		if (thousandths >= 5) {
-			times100++;
-			double rounded = (times100 / 10.00);
-			return rounded;
-		} else if (thousandths <= -5) {
-			times100--;
-			double rounded = (times100 / 10.00);
-			return rounded;
-		} else {
-			double rounded = (times100 / 10.00);
-			return rounded;
-		}
-		
+		return (2 * calcAreaOfBase()) + (calcPerimeter() * height);
 	}
 	
 }

@@ -23,6 +23,7 @@ public class TriangularPrism extends Prism{
 		sideA = a;
 		sideB = b;
 		sideC = c;
+		this.setup();
 	}
 	
 	public double getSideA() {

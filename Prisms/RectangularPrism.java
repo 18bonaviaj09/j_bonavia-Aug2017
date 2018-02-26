@@ -16,6 +16,7 @@ public class RectangularPrism extends Prism {
 		super(h);
 		length = l;
 		width = w;
+		this.setup();
 	}
 	
 	public double getWidth() {

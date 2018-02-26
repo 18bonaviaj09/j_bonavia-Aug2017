@@ -14,6 +14,7 @@ public class Cylinder extends Prism {
 	public Cylinder(double r, double h) {
 		super(h);
 		radius = r;
+		this.setup();
 	}
 	
 	public double getRadius() {
