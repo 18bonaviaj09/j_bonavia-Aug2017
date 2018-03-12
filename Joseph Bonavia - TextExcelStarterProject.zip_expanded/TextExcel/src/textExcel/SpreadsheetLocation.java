@@ -4,7 +4,9 @@ package textExcel;
 
 public class SpreadsheetLocation implements Location
 {
-    @Override
+	private String cellName;
+   
+	@Override
     public int getRow()
     {
         // TODO Auto-generated method stub
@@ -12,15 +14,16 @@ public class SpreadsheetLocation implements Location
     }
 
     @Override
-    public int getCol()
+    public int getCol().
     {
-        // TODO Auto-generated method stub
-        return 0;
+        char col = cellName.charAt(0);
+        col = Character.toLowerCase(col);
+        return Character.getNumericalValue(col) - 97;
     }
     
     public SpreadsheetLocation(String cellName)
     {
-        // TODO: Fill this out with your own code
+        this.cellName = cellName;
     }
 
 }
