@@ -6,32 +6,27 @@ public class Spreadsheet implements Grid
 {
 
 	@Override
-	public String processCommand(String command)
-	{
+	public String processCommand(String command) {
 		return "";
 	}
 
 	@Override
-	public int getRows()
-	{
+	public int getRows() {
 		return 20;
 	}
 
 	@Override
-	public int getCols()
-	{
+	public int getCols() {
 		return 12;
 	}
 
 	@Override
-	public Cell getCell(Location loc)
-	{
+	public Cell getCell(Location loc) {
 		return null;
 	}
 
 	@Override
-	public String getGridText()
-	{
+	public String getGridText() {
 		return null;
 	}
 
