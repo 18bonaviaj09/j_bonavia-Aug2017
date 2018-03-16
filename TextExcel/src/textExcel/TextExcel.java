@@ -21,5 +21,7 @@ public class TextExcel
 	    		spreadsheet.processCommand(nextCommand);
 	    	}
 	    }
+	    
+	    System.out.print(spreadsheet.getGridText());
 	}
 }

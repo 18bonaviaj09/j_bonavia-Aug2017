@@ -2,9 +2,14 @@ package textExcel;
 
 // Update this file with your own code.
 
-public class Spreadsheet implements Grid
-{
+public class Spreadsheet implements Grid {
+	
+	Cell[][] thisSheet; 
 
+	public Spreadsheet() {
+		thisSheet = new Cell[getCols()][getRows()];
+	}
+	
 	@Override
 	public String processCommand(String command) {
 		return "";
@@ -27,7 +32,15 @@ public class Spreadsheet implements Grid
 
 	@Override
 	public String getGridText() {
-		return null;
+		String output = "   ";
+		
+		for (int i = 0; i < thisSheet.length; i++) {
+			output = output + "|" + ((char)(65 + i)) + "         ";
+		}
+		
+		output += "\n";
+		
+		return output;
 	}
 
 }
