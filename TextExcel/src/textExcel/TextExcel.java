@@ -18,10 +18,8 @@ public class TextExcel
 	    	if (nextCommand.equals("quit")) {
 	    		contin = false;
 	    	} else {
-	    		spreadsheet.processCommand(nextCommand);
+	    		System.out.println(spreadsheet.processCommand(nextCommand));
 	    	}
 	    }
-	    
-	    System.out.print(spreadsheet.getGridText());
 	}
 }

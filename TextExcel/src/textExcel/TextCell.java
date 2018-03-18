@@ -10,10 +10,10 @@ public class TextCell implements Cell {
 	public String abbreviatedCellText() {
 		String abbreviated;
 		if (value.length() > 10) {
-			abbreviated = value.substring(0, 11);
+			abbreviated = value.substring(0, 10);
 		} else {
 			abbreviated = value;
-			for (int i = value.length(); i <= 10; i++) {
+			for (int i = value.length(); i <= 10 - 1; i++) {
 				abbreviated += " ";
 			}
 		}
