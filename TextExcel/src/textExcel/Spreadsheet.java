@@ -40,7 +40,7 @@ public class Spreadsheet implements Grid {
 				}
 			}
 		}
-		return "TEST";
+		return "This is not a valid command.";
 
 	}
 
