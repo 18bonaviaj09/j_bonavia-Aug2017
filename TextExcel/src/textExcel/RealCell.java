@@ -1,17 +1,30 @@
 package textExcel;
 
 public abstract class RealCell implements Cell {
-	private double value;
+	private String value;
 	
-	public RealCell(double value) {
+	public RealCell(String value) {
 		this.value = value;
 	}
 	
-	protected double getValue() {
-		return value;
+	public double createDouble(String value, int length) {
+		String shortened = value;
+		if (shortened.length() > length) {
+			shortened = shortened.substring(0, length);
+		}
+		return Double.parseDouble(shortened);
 	}
 	
 	public abstract String abbreviatedCellText(); 
-	public abstract String fullCellText();
 	
+	public String fullCellText() {
+		return value;
+	}
+	
+	public String pad(String input) {
+		while (input.length() < 10) {
+			input += " ";
+		}
+		return input;
+	}
 }

@@ -25,18 +25,25 @@ public class Spreadsheet implements Grid {
 		} else if (parsed.length == 2) {
 			if (command.toLowerCase().startsWith("clear")) {
 				Location thisCell = new SpreadsheetLocation(parsed[1]);
-				thisSheet[thisCell.getCol()][thisCell.getRow()] = new EmptyCell(); // check this out
+				thisSheet[thisCell.getCol()][thisCell.getRow()] = new EmptyCell(); 
 				return getGridText();
 			}
 		} else {
 			if (Character.isAlphabetic(Character.toLowerCase(command.charAt(0))) && Character.isDigit(command.charAt(1))) {
+				Location thisCell = new SpreadsheetLocation(parsed[0].toLowerCase());
 				if (parsed[1].equals("=")) {
 					if (parsed[2].startsWith("" + '"')) {
-						Location thisCell = new SpreadsheetLocation(parsed[0].toLowerCase());
 						String input = parsed[2].substring(1, (parsed[2].length() - 1));
-						thisSheet[thisCell.getCol()][thisCell.getRow()] = new TextCell(input); //check this out
-						return getGridText();
+						thisSheet[thisCell.getCol()][thisCell.getRow()] = new TextCell(input); 
+					} else if (parsed[2].endsWith("%")) {
+						String input = parsed[2].substring(0, (parsed[2].length() - 1));
+						thisSheet[thisCell.getCol()][thisCell.getRow()] = new PercentCell(input);
+					} else if (parsed[2].startsWith("(") && parsed[2].endsWith(")")) {
+						thisSheet[thisCell.getCol()][thisCell.getRow()] = new FormulaCell(parsed[2]);
+					} else {
+						thisSheet[thisCell.getCol()][thisCell.getRow()] = new ValueCell(parsed[2]);
 					}
+					return getGridText();
 				}
 			}
 		}
