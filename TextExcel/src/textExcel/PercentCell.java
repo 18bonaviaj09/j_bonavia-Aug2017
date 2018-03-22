@@ -7,7 +7,8 @@ public class PercentCell extends ValueCell{
 	}
 	
 	public String abbreviatedCellText() {
-		String abbreviated = ((int) createDouble(super.fullCellText(), (super.fullCellText().substring(0, super.fullCellText().indexOf(".")))).length()) + "%";
+		int point = super.fullCellText().indexOf(".");
+		String abbreviated = super.fullCellText().substring(0, point) + "%";
 		abbreviated = pad(abbreviated);
 		return abbreviated;
 	}
