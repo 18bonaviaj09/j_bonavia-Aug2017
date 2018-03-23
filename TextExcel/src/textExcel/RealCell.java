@@ -27,4 +27,16 @@ public abstract class RealCell implements Cell {
 		}
 		return input;
 	}
+	
+	public String powerOfTenFixer(String input) {
+		String abbreviated = input;
+		if (abbreviated.contains("E")) {
+			int e = abbreviated.indexOf("E");
+			String powerOfTen = abbreviated.substring(e, abbreviated.length());
+			String number = abbreviated.substring(0, e);
+			abbreviated = "" + createDouble(number, 10 - powerOfTen.length()) + powerOfTen;
+		}
+		abbreviated = pad(abbreviated);
+		return abbreviated;
+	}
 }
