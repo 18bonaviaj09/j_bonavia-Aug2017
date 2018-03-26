@@ -16,7 +16,7 @@ public class FormulaCell extends RealCell{
 	public double createDouble(String value, int length) {
 		String[] formulaArray = value.split(" ");
 		double resultant = super.createDouble(formulaArray[1], Integer.MAX_VALUE);
-		for (int i = 2; i < formulaArray.length - 3; i += 2) {
+		for (int i = 2; i < formulaArray.length - 2; i += 2) {
 			double nextValue = super.createDouble(formulaArray[i + 1], Integer.MAX_VALUE);
 			if (formulaArray[i].equals("+")) {
 				resultant = resultant + nextValue;
@@ -32,4 +32,8 @@ public class FormulaCell extends RealCell{
 		return resultant;
 	}
 
+	public double evaluator(String operand) {
+		if ()
+		return 1.0;
+	}
 }
