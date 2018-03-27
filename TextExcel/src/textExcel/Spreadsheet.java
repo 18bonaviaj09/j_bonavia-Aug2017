@@ -39,7 +39,7 @@ public class Spreadsheet implements Grid {
 						String input = parsed[2].substring(0, (parsed[2].length() - 1));
 						thisSheet[thisCell.getCol()][thisCell.getRow()] = new PercentCell(input);
 					} else if (parsed[2].startsWith("(") && parsed[2].endsWith(")")) {
-						thisSheet[thisCell.getCol()][thisCell.getRow()] = new FormulaCell(parsed[2]);
+						thisSheet[thisCell.getCol()][thisCell.getRow()] = new FormulaCell(parsed[2], this);
 					} else {
 						thisSheet[thisCell.getCol()][thisCell.getRow()] = new ValueCell(parsed[2]);
 					}
